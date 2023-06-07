@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "dc3fb23b-e053-473c-b9a1-f1b601e3e98f",
+		"name": "http://www.mocky.io/v2/5ab34d8c2f00006600ca3652",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19662546"
+	},
+	"item": [
+		{
+			"name": "http://www.mocky.io/v2/5ab34d8c2f00006600ca3652",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//1st variable\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"\r",
+							"console.log(jsonData.prefs.permissionLevel);\r",
+							"\r",
+							"//2nd variable\r",
+							"let status = jsonData.prefs.comments.status;\r",
+							"\r",
+							"//3rd variable\r",
+							"let count = jsonData.prefs.comments.count;\r",
+							"\r",
+							"pm.test (\"Verify the ID\", function(){\r",
+							"    pm.expect (jsonData.id).to.eql(\"5ab34c7b0ba0f8932222352c\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the name\", function(){\r",
+							"    pm.expect (jsonData.name).to.eql(\"My board 7\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"PermissionLevel should be private\", function(){\r",
+							"    pm.expect (jsonData.prefs.permissionLevel).to.eql(\"private\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Voting should be disabled\", function (){\r",
+							"    pm.expect (jsonData.prefs.voting).to.eql(\"disabled\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Status should be disabled\", function (){\r",
+							"      pm.expect (status).to.eql(\"disabled\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Count should be 0\", function(){\r",
+							"    pm.expect (count).to.eqls(0)\r",
+							"});\r",
+							"\r",
+							"// Тотална каша \r",
+							"\r",
+							"console.log(jsonData.limits['54bba24af6196bd5f824e563']);\r",
+							"\r",
+							"let count2 =  jsonData.limits['54bba24af6196bd5f824e563'].boards.totalPerMember.count;\r",
+							"\r",
+							"//second part \r",
+							"pm.test (\"Verify the all keys and reach to count\", function (){\r",
+							"    pm.expect (jsonData.limits['54bba24af6196bd5f824e563'].boards.totalPerMember.count).to.eql(1)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the status\", function (){\r",
+							"    pm.expect (jsonData.limits['54bba24af6196bd5f824e563'].boards.totalPerMember.status).to.eql(\"ok\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the key disableAt\", function (){\r",
+							"    pm.expect (jsonData.limits['54bba24af6196bd5f824e563'].boards.totalPerMember.disableAt).to.eql(56050)\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test (\"Verify the key warnAt\", function (){\r",
+							"     pm.expect (jsonData.limits['54bba24af6196bd5f824e563'].boards.totalPerMember.warnAt).to.eql(53100)\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://www.mocky.io/v2/5ab34d8c2f00006600ca3652",
+					"protocol": "http",
+					"host": [
+						"www",
+						"mocky",
+						"io"
+					],
+					"path": [
+						"v2",
+						"5ab34d8c2f00006600ca3652"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
