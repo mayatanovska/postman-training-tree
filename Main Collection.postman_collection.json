@@ -1,0 +1,931 @@
+{
+	"info": {
+		"_postman_id": "aca91e06-843d-4945-bb51-21e6ab3e0bc7",
+		"name": "Main Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19662546"
+	},
+	"item": [
+		{
+			"name": "GET Status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Verify the status code\",function (){\r",
+							"       pm.response.to.have.status(200)\r",
+							"       pm.response.to.be.ok\r",
+							"   });\r",
+							"\r",
+							"   pm.test (\"Request has a JSON body\", function (){\r",
+							"       pm.response.to.have.jsonBody\r",
+							"   });\r",
+							"\r",
+							"   let response = pm.response.json()\r",
+							"\r",
+							"   pm.test (\"Verify that the response body is returning the status of the API\", function (){\r",
+							"       pm.expect(response.status).to.have.string;\r",
+							"       pm.expect(response.status).to.eql(\"OK\");\r",
+							"   });\r",
+							"\r",
+							"   pm.test (\"Verify the status 201\",function (){\r",
+							"       pm.response.to.have.status(200)\r",
+							"   });\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/status",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET/Returns-books-type-fiction-limit-correctly",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Returns a list of books\",function (){\r",
+							"    pm.response.to.have.status (200);\r",
+							"    });\r",
+							"\r",
+							"    let jsonData = pm.response.json();\r",
+							"\r",
+							"    pm.test (\"To check  The Vanishing Half is available\", function (){\r",
+							"        pm.expect(jsonData[1].available).to.eql(true);\r",
+							"    });\r",
+							"\r",
+							"    pm.test (\"To check\")\r",
+							"\r",
+							"  \r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/books?type=fiction&limit=2",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "fiction"
+						},
+						{
+							"key": "limit",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET All Books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Returns a list of books\",function (){\r",
+							"    pm.response.to.have.status (200)\r",
+							"    pm.response.to.be.ok\r",
+							"   });\r",
+							"\r",
+							" pm.test (\"Request has a JSON body\", function (){\r",
+							"       pm.response.to.have.jsonBody\r",
+							"   });\r",
+							"\r",
+							"   let response = pm.response.json();\r",
+							"\r",
+							"   pm.test (\"Verify that the response include 6 books\", function(){\r",
+							"       console.log(response.length)\r",
+							"       pm.expect(response).to.be.an('array').and.to.have.lengthOf(6);\r",
+							"   });\r",
+							"\r",
+							"   pm.test (\"To check The Viscount Who Loved Me is of type fiction\", function(){\r",
+							"       pm.expect(response[0].type).to.eql(\"fiction\")\r",
+							"   });\r",
+							"\r",
+							"   pm.test (\"To check Just as I Am is of type non-fiction\", function(){\r",
+							"       pm.expect(response[1].type).to.eql(\"non-fiction\")\r",
+							"   });\r",
+							"\r",
+							"   pm.test (\"Verify that all books are of type Fiction\", function (){\r",
+							"     \r",
+							"       pm.expect(response[0].type).to.eql('fiction');\r",
+							"       pm.expect(response[2].type).to.eql('fiction');\r",
+							"       pm.expect(response[3].type).to.eql('fiction');\r",
+							"       pm.expect(response[5].type).to.eql('fiction');\r",
+							"   });\r",
+							"\r",
+							"   pm.test (\"Verify that 'The Russian' is in the response\", function(){\r",
+							"       pm.expect (response[0].name).to.eql ('The Russian')\r",
+							"   });\r",
+							"\r",
+							"   pm.test (\"Verify that the type non-fiction is in response\", function (){\r",
+							"       pm.expect (response[1].type).to.eql ('non-fiction')\r",
+							"   });\r",
+							"\r",
+							"   pm.test (\"Verify that the available true is in response\", function (){\r",
+							"       pm.expect (response[0].available).to.be.true\r",
+							"   });\r",
+							"\r",
+							"   pm.test (\"Verify that the available false is in response\", function (){\r",
+							"       pm.expect (response[1].available).to.be.false\r",
+							"   });\r",
+							"\r",
+							"   pm.test (\"Verify that ID is 1\", function (){\r",
+							"       pm.expect (response[0].id).to.eql(1)\r",
+							"   });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/books",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Single book details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify detailed information about a book\",function (){\r",
+							"    pm.response.to.have.status (200)\r",
+							"});\r",
+							"\r",
+							"let response = pm.response.json();\r",
+							"\r",
+							"pm.test (\"Verify that ID is 3\", function (){\r",
+							"    pm.expect (response.id).to.eql(3)\r",
+							"    });\r",
+							"\r",
+							"pm.test (\"Verify the name of that book\", function (){\r",
+							"    pm.expect (response.name).to.eql('The Vanishing Half')\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the author of that book\", function (){\r",
+							"    pm.expect (response.author).to.eql('Brit Bennett')\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the type of that book\", function (){\r",
+							"    pm.expect (response.type).to.eql('fiction')\r",
+							"});\r",
+							"\r",
+							"//check this step for the price !!!\r",
+							"pm.test (\"Verify the price of that book\", function (){\r",
+							"    pm.expect (response.price).to.eqls(16.2)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the book's current-stock is 987\", function (){\r",
+							"    pm.expect (pm.response.json()['current-stock']).to.eql(987)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify available of that book\", function (){\r",
+							"    pm.expect (response.available).to.be.true\r",
+							"});\r",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/books/:bookId?=",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"books",
+						":bookId"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": ""
+						},
+						{
+							"key": null,
+							"value": "",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "bookId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST/api-clients/Assess-token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Verify your API client\", function (){\r",
+							"    pm.response.to.have.status (201)\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Successful generate Access Token\", function (){\r",
+							"    pm.expect(jsonData.accessToken).to.be.string\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"AccessToken\", jsonData.accessToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"clientName\": \"{{$randomFullName}}\",\r\n   \"clientEmail\": \"{{$randomEmail}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api-clients/",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api-clients",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Submit order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Submit order\", function (){\r",
+							"    pm.response.to.have.status (201)\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json()\r",
+							"\r",
+							"pm.test (\"Check if Order is created\", function (){\r",
+							"    pm.expect(jsonData.created).to.be.true\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"orderId\", jsonData.orderId)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"bookId\": 1,\r\n  \"customerName\": \"John\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/orders",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"orders"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Submit order test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Submit order\", function () {\r",
+							"    pm.response.to.have.status(201)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Request has a JSON body\", function (){\r",
+							"    pm.response.to.have.jsonBody\r",
+							"   });\r",
+							"\r",
+							"let response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Verify the new order has created key with value true\", function () {\r",
+							"    pm.expect(response.created).to.be.true\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify the orderId is with string value\", function () {\r",
+							"    pm.expect(response.orderId).to.have.string\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"bookId\": 1,\r\n  \"customerName\": \"John\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/orders",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"orders"
+					],
+					"query": [
+						{
+							"key": "bookid",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "customername",
+							"value": "John",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET/Allow-to-view-all-orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"-pm.test (\"Allow to view all orders\", function (){\r",
+							"    pm.response.to.have.status (200)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/orders?bookId=2&customerName=John&quantity=0",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"orders"
+					],
+					"query": [
+						{
+							"key": "bookId",
+							"value": "2"
+						},
+						{
+							"key": "customerName",
+							"value": "John"
+						},
+						{
+							"key": "quantity",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET/Allow-to-view-all-orders-201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"-pm.test (\"Allow to view all orders\", function (){\r",
+							"    pm.response.to.have.status (200)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Request has a JSON body\", function (){\r",
+							"       pm.response.to.have.jsonBody\r",
+							"   });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/orders?bookId=1&customerName=Maya&quantity=1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"orders"
+					],
+					"query": [
+						{
+							"key": "bookId",
+							"value": "1"
+						},
+						{
+							"key": "customerName",
+							"value": "Maya"
+						},
+						{
+							"key": "quantity",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Single Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Allow to see exist order\", function (){\r",
+							"    pm.response.to.have.status (200)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Request has a JSON body\",function(){\r",
+							"    pm.response.to.have.jsonBody (\"bookId\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/orders/:orderId",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"orders",
+						":orderId"
+					],
+					"variable": [
+						{
+							"key": "orderId",
+							"value": "{{orderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Exist Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"-pm.test (\"Allow to see exist order\", function (){\r",
+							"    pm.response.to.have.status (200)\r",
+							"   });\r",
+							"\r",
+							"pm.test (\"Request has a JSON body\", function (){\r",
+							"    pm.response.to.have.jsonBody\r",
+							"   });\r",
+							"\r",
+							"let response = pm.response.json();\r",
+							"\r",
+							"pm.test (\"Verify the ID\", function(){\r",
+							"    pm.expect (response.id).to.have.string\r",
+							"   });\r",
+							"\r",
+							"pm.test (\"Verify the the bookId\", function (){\r",
+							"    pm.expect (response.bookId).to.eql(1)\r",
+							"   });\r",
+							"\r",
+							"pm.test (\"Verify the customerName\", function (){\r",
+							"    pm.expect (response.customerName).to.eql('John')\r",
+							"    });\r",
+							"//when there is value with numbers, is that the properly way to describe it \r",
+							"pm.test (\"Verify the createdBy\", function (){\r",
+							"    pm.expect (response.createdBy).to.have.string\r",
+							"    });\r",
+							"\r",
+							"pm.test (\"Verify the quantity\", function (){\r",
+							"    pm.expect (response.quantity).to.eql(1)\r",
+							"    });\r",
+							"//when there is value with numbers, is that the properly way to describe it \r",
+							"pm.test (\"Verify the timestamp\", function (){\r",
+							"    pm.expect (response.timestamp).to.have.string\r",
+							"    });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/orders/:orderId",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"orders",
+						":orderId"
+					],
+					"variable": [
+						{
+							"key": "orderId",
+							"value": "{{orderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST/api-clients/ Template",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Status code for POST request is 201\", function (){\r",
+							"    pm.response.to.have.status (201)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Request response has accessToken\", function (){\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"clientName\": \"{{$randomFullName}}\",\r\n   \"clientEmail\": \"{{$randomEmail}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api-clients/",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api-clients",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH/Update-existing-order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Status code for PATCH request is 204\", function (){\r",
+							"    pm.response.to.have.status(204)\r",
+							"})\r",
+							"\r",
+							"//check if the response body is empty\r",
+							"pm.test (\"Request has an empty JSON body\", function (){\r",
+							"    pm.response.to.have.jsonBody(null)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customerName\": \"Mar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/orders/{{orderId}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"orders",
+						"{{orderId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE/orders/:orderId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Status code for POST request is 204 on first request run\", function (){\r",
+							"    pm.response.to.have.status(204)\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/orders/:orderId",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"orders",
+						":orderId"
+					],
+					"variable": [
+						{
+							"key": "orderId",
+							"value": "{{orderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
