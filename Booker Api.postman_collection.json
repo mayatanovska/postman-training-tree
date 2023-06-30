@@ -39,7 +39,25 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -79,6 +97,9 @@
 							"\r",
 							"\r",
 							"    let jsonData = pm.response.json();\r",
+							"      pm.test(\"Varify thet bookingid is not empty\", function() {\r",
+							"    pm.expect(jsonData.bookingid).to.have.ownProperty;\r",
+							"    });\r",
 							"\r",
 							"\r",
 							"pm.test (\"To check  checkin\", function (){\r",
@@ -90,15 +111,46 @@
 							"    });\r",
 							"\r",
 							"    pm.test (\"To check\")\r",
+							"\r",
+							"\r",
+							"  \r",
 							""
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {}
+			},
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "https://restful-booker.herokuapp.com/booking",
 					"protocol": "https",
@@ -212,24 +264,30 @@
 							"\r",
 							"    let jsonData = pm.response.json();\r",
 							"\r",
-							"pm.test (\"Check in the firstname and type of firstname\", function(){\r",
-							"    pm.expect (jsonData.firstname).to.eql(\"Josh\")\r",
-							"    pm.expect (jsonData.firstname).to.have.string\r",
-							"});    \r",
+							"pm.environment.set(\"firstname\", jsonData.firstname);\r",
+							"pm.environment.set(\"lastname\", jsonData.lastname);\r",
+							"pm.environment.set(\"additionalneeds\", jsonData.additionalneeds);\r",
 							"\r",
-							"pm.test (\"Check in the lastname and type of lastname\", function(){\r",
-							"    pm.expect (jsonData.lastname).to.eql(\"Allen\")\r",
-							"    pm.expect (jsonData.lastname).to.have.string\r",
+							"\r",
+							"pm.test (\"Check in the firstname and type of firstname \", function (){\r",
+							"pm.expect(jsonData.firstname).to.eqls(pm.environment.get(\"firstname\"))\r",
+							"pm.expect (jsonData.firstname).to.have.string\r",
+							"});\r",
+							"    \r",
+							"pm.test (\"Check in the lastname and type of lastname\", \r",
+							"        function (){\r",
+							"pm.expect(jsonData.lastname).to.eqls(pm.environment.get(\"lastname\"))\r",
+							"pm.expect (jsonData.lastname).to.have.string\r",
 							"}); \r",
 							"\r",
 							"pm.test (\"Check in the totalprice and type of totalprice\", function(){\r",
-							"    pm.expect (jsonData.totalprice).to.eql(111)\r",
-							"    pm.expect (jsonData.totalprice).to.be.a(\"number\")\r",
+							"pm.expect (jsonData.totalprice).to.eql(111)\r",
+							"pm.expect (jsonData.totalprice).to.be.a(\"number\")\r",
 							"}); \r",
 							"\r",
 							"pm.test (\"Check in the depositpaid and type of depositpaid\", function(){\r",
-							"    pm.expect (jsonData.depositpaid).to.be.true\r",
-							"    pm.expect (jsonData.depositpaid).to.be.a(\"Boolean\")\r",
+							"pm.expect (jsonData.depositpaid).to.be.true\r",
+							"pm.expect (jsonData.depositpaid).to.be.a(\"Boolean\")\r",
 							"});\r",
 							"\r",
 							" pm.test (\"Verify the checkin\", function(){\r",
@@ -240,9 +298,9 @@
 							"    pm.expect (jsonData.bookingdates.checkout).to.eql(\"2019-01-01\")\r",
 							"});\r",
 							"\r",
-							"pm.test (\"Verify the additionalneeds and type of additionalneeds  \", function(){\r",
-							"    pm.expect (jsonData.additionalneeds).to.eql('super bowls')\r",
-							"    pm.expect (jsonData.additionalneeds).to.have.string\r",
+							"pm.test (\"Verify the additionalneeds and type of additionalneeds\", function (){\r",
+							"pm.expect(jsonData.additionalneeds).to.eqls(pm.environment.get(\"additionalneeds\"))\r",
+							"pm.expect (jsonData.additionalneeds).to.have.string\r",
 							"\r",
 							"});\r",
 							""
@@ -272,7 +330,7 @@
 					"variable": [
 						{
 							"key": "id\n",
-							"value": "668"
+							"value": "1216"
 						}
 					]
 				}
@@ -298,9 +356,7 @@
 							"    pm.expect(jsonData.lastname).to.have.string;\r",
 							"    });\r",
 							"\r",
-							"pm.test (\"To check  bookingid\", function (){\r",
-							"    pm.expect(jsonData[0].bookingid).to.eql(154);\r",
-							"    });\r",
+							"\r",
 							"  "
 						],
 						"type": "text/javascript"
@@ -533,7 +589,7 @@
 							"});\r",
 							"\r",
 							"pm.test (\"Verify the additionalneeds and type of additionalneeds\", function(){\r",
-							"    pm.expect (jsonData.additionalneeds).to.eql('Breakfast')\r",
+							"    pm.expect (jsonData.additionalneeds).to.eql('super bowls')\r",
 							"    pm.expect (jsonData.additionalneeds).to.have.string\r",
 							"\r",
 							"});\r",
@@ -673,6 +729,26 @@
 					"path": [
 						"ping"
 					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://reqres.in/#support-heading",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/#support-heading",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						""
+					],
+					"hash": "support-heading"
 				}
 			},
 			"response": []
