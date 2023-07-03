@@ -1,0 +1,32 @@
+{
+	"id": "4a1aee34-3bb0-469e-8c78-a577e2cb4585",
+	"values": [
+		{
+			"key": "BaseUrl",
+			"value": "https://simple-books-api.glitch.me",
+			"enabled": true
+		},
+		{
+			"key": "BaseUrl",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "orderId",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "AccessToken",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2023-07-03T13:22:18.781Z",
+	"_postman_exported_using": "Postman/9.31.27"
+}
