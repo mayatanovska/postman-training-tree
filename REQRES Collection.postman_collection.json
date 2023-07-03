@@ -1,0 +1,1022 @@
+{
+	"info": {
+		"_postman_id": "20f8f403-4d17-4250-87c1-36564e559ded",
+		"name": "REQRES Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19662546"
+	},
+	"item": [
+		{
+			"name": "List Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Verify the status code\",function (){\r",
+							"       pm.response.to.have.status(200)\r",
+							"       pm.response.to.be.ok\r",
+							"   });\r",
+							"\r",
+							"   //1st variable\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log(jsonData.data.id);\r",
+							"\r",
+							"\r",
+							"pm.test (\"Verify the page\", function(){\r",
+							"    pm.expect (jsonData.page).to.eqls(2)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the per_page\", function(){\r",
+							"    pm.expect (jsonData.per_page).to.eqls(6)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the total\", function(){\r",
+							"    pm.expect (jsonData.total).to.eqls(12)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the total_pages\", function(){\r",
+							"    pm.expect (jsonData.total_pages).to.eqls(2)\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//2nd variable\r",
+							"\r",
+							"let data1 = jsonData.data[0];\r",
+							"//let data1 = jsonData.data1;\r",
+							"console.log(data1);\r",
+							"\r",
+							"\r",
+							"pm.test (\"Verify the id\", function(){\r",
+							"    pm.expect (data1.id).to.eqls(7)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the email\", function(){\r",
+							"    pm.expect (data1.email).to.eql(\"michael.lawson@reqres.in\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the first name\", function(){\r",
+							"    pm.expect (data1.first_name).to.eql(\"Michael\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the last name\", function(){\r",
+							"    pm.expect (data1.last_name).to.eql(\"Lawson\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the avatar\", function(){\r",
+							"    pm.expect (data1.avatar).to.eql(\"https://reqres.in/img/faces/7-image.jpg\")\r",
+							"});\r",
+							"\r",
+							"\r",
+							"let data3 = jsonData.data[2];\r",
+							"//let data1 = jsonData.data1;\r",
+							"console.log(data3);\r",
+							"\r",
+							"\r",
+							"pm.test (\"Verify the id\", function(){\r",
+							"    pm.expect (data3.id).to.eqls(9)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the email\", function(){\r",
+							"    pm.expect (data3.email).to.eql(\"tobias.funke@reqres.in\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the first name\", function(){\r",
+							"    pm.expect (data3.first_name).to.eql(\"Tobias\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the last name\", function(){\r",
+							"    pm.expect (data3.last_name).to.eql(\"Funke\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the avatar\", function(){\r",
+							"    pm.expect (data3.avatar).to.eql(\"https://reqres.in/img/faces/9-image.jpg\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Single User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Verify the status code\",function (){\r",
+							"       pm.response.to.have.status(200)\r",
+							"       pm.response.to.be.ok\r",
+							"   });\r",
+							"\r",
+							" //1st variable\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log(jsonData.data.id);\r",
+							"\r",
+							"pm.test (\"Verify the id\", function(){\r",
+							"    pm.expect (jsonData.data.id).to.eqls(2)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the email\", function(){\r",
+							"    pm.expect (jsonData.data.email).to.eql(\"janet.weaver@reqres.in\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the first name\", function(){\r",
+							"    pm.expect (jsonData.data.first_name).to.eql(\"Janet\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the last name\", function(){\r",
+							"    pm.expect (jsonData.data.last_name).to.eql(\"Weaver\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the avatar\", function(){\r",
+							"    pm.expect (jsonData.data.avatar).to.eql(\"https://reqres.in/img/faces/2-image.jpg\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the url\", function(){\r",
+							"    pm.expect (jsonData.support.url).to.eql(\"https://reqres.in/#support-heading\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the text\", function(){\r",
+							"    pm.expect (jsonData.support.text).to.eql('To keep ReqRes free, contributions towards server costs are appreciated!')\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Single User Not Found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Verify the status code\",function (){\r",
+							"       pm.response.to.have.status(404)\r",
+							"       pm.response.to.be.notFound\r",
+							"       });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/23",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"23"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List <Resource>",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Verify the status code\",function (){\r",
+							"       pm.response.to.have.status(200)\r",
+							"       pm.response.to.be.ok\r",
+							"   });\r",
+							"\r",
+							" //1st variable\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"pm.test (\"Verify the page\", function(){\r",
+							"    pm.expect (jsonData.page).to.eqls(1)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the page\", function(){\r",
+							"    pm.expect (jsonData.per_page).to.eqls(6)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the total\", function(){\r",
+							"    pm.expect (jsonData.total).to.eqls(12)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the total page\", function(){\r",
+							"    pm.expect (jsonData.total_pages).to.eqls(2)\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//2nd variable - цикъл\r",
+							"let data1 = jsonData.data[0];\r",
+							"console.log(data1);\r",
+							"\r",
+							"pm.test (\"Verify the id\", function(){\r",
+							"    pm.expect (data1.id).to.eqls(1)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the name\", function(){\r",
+							"    pm.expect (data1.name).to.eqls('cerulean')\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the year\", function(){\r",
+							"    pm.expect (data1.year).to.eqls(2000)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the color\", function(){\r",
+							"    pm.expect (data1.color).to.eqls(\"#98B2D1\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the pantone value\", function(){\r",
+							"    pm.expect (data1.pantone_value).to.eqls(\"15-4020\")\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//3rd variable цикъл \r",
+							"let data6 = jsonData.data[5];\r",
+							"console.log(data6);\r",
+							"\r",
+							"pm.test (\"Verify the id\", function(){\r",
+							"    pm.expect (data6.id).to.eqls(6)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the name\", function(){\r",
+							"    pm.expect (data6.name).to.eqls('blue turquoise')\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the year\", function(){\r",
+							"    pm.expect (data6.year).to.eqls(2005)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the color\", function(){\r",
+							"    pm.expect (data6.color).to.eqls(\"#53B0AE\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the pantone value\", function(){\r",
+							"    pm.expect (data6.pantone_value).to.eqls(\"15-5217\")\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//4rd variable за  support\r",
+							"let support1 = jsonData.support;\r",
+							"console.log(support1);\r",
+							"\r",
+							"\r",
+							"pm.test (\"Verify the url\", function(){\r",
+							"    pm.expect (support1.url).to.eqls(\"https://reqres.in/#support-heading\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the text\", function(){\r",
+							"    pm.expect (support1.text).to.eqls(\"To keep ReqRes free, contributions towards server costs are appreciated!\")\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/unknown",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"unknown"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Single <Resource>",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Verify the status code\",function (){\r",
+							"       pm.response.to.have.status(200)\r",
+							"       pm.response.to.be.ok\r",
+							"   });\r",
+							"\r",
+							" //1st variable\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log(jsonData.data.id);\r",
+							"\r",
+							"pm.test (\"Verify the id\", function(){\r",
+							"    pm.expect (jsonData.data.id).to.eqls(2)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the name\", function(){\r",
+							"    pm.expect (jsonData.data.name).to.eqls(\"fuchsia rose\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the year\", function(){\r",
+							"    pm.expect (jsonData.data.year).to.eqls(2001)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the color\", function(){\r",
+							"    pm.expect (jsonData.data.color).to.eqls(\"#C74375\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the pantone value\", function(){\r",
+							"    pm.expect (jsonData.data.pantone_value).to.eqls( \"17-2031\")\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//2nd variable\r",
+							"let support1 = jsonData.support;\r",
+							"console.log(support1);\r",
+							"\r",
+							"pm.test (\"Verify the url\", function(){\r",
+							"    pm.expect (support1.url).to.eqls(\"https://reqres.in/#support-heading\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the text\", function(){\r",
+							"    pm.expect (support1.text).to.eqls(\"To keep ReqRes free, contributions towards server costs are appreciated!\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/unknown/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"unknown",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Single <resource> not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Verify the status code\",function (){\r",
+							"       pm.response.to.have.status(404)\r",
+							"       pm.response.to.be.notFound\r",
+							"       });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/unknown/23",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"unknown",
+						"23"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Check if it has been created \", function (){\r",
+							"    pm.response.to.have.status (201)\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json()\r",
+							"\r",
+							"pm.environment.set(\"id\", jsonData.id);\r",
+							"\r",
+							"pm.environment.set(\"createdAt\",jsonData.createdAt);\r",
+							"\r",
+							"pm.test (\"Check the name \", function (){\r",
+							"    pm.expect(jsonData.name).to.eqls(\"morpheus\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Check the job \", function (){\r",
+							"    pm.expect(jsonData.job).to.eqls(\"leader\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Check the id \", function (){\r",
+							"    pm.expect(jsonData.id).to.eqls(pm.environment.get(\"id\"))\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Check the createdAt \", function (){\r",
+							"    pm.expect(jsonData.createdAt).to.eqls(pm.environment.get(\"createdAt\"))\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Check if it has been updated \", function (){\r",
+							"    pm.response.to.have.status (200)\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"updatedAt\",jsonData.updatedAt);\r",
+							"\r",
+							"pm.test (\"Check the name \", function (){\r",
+							"    pm.expect(jsonData.name).to.eqls(\"morpheus\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Check the job \", function (){\r",
+							"    pm.expect(jsonData.job).to.eqls(\"zion resident\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Check the updatedAt \", function (){\r",
+							"    pm.expect(jsonData.updatedAt).to.eqls(pm.environment.get(\"updatedAt\"))\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"zion resident\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Check if the user is updated\", function (){\r",
+							"    pm.response.to.have.status (200)\r",
+							"    pm.response.to.be.ok\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json()\r",
+							"\r",
+							"pm.environment.set(\"id\", jsonData.id);\r",
+							"\r",
+							"pm.environment.set(\"createdAt\",jsonData.createdAt);\r",
+							"\r",
+							"pm.test (\"Check the name \", function (){\r",
+							"    pm.expect(jsonData.name).to.eqls(\"morpheus\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Check the job \", function (){\r",
+							"    pm.expect(jsonData.job).to.eqls(\"zion resident\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Check the id \", function (){\r",
+							"    pm.expect(jsonData.id).to.eqls(pm.environment.get(\"id\"))\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Check the createdAt \", function (){\r",
+							"    pm.expect(jsonData.createdAt).to.eqls(pm.environment.get(\"createdAt\"))\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"zion resident\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204 Not found\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"    pm.response.to.not.contain\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register - Successful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Check the status code 200\", function (){\r",
+							"    pm.response.to.have.status (200)\r",
+							"    pm.response.to.be.ok\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"pm.test (\"Verify the id\", function(){\r",
+							"    pm.expect (jsonData.id).to.eql(4)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the token\", function(){\r",
+							"    pm.expect (jsonData.token).to.eql(\"QpwL5tke4Pnpja7X4\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"pistol\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/register",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register - Unsuccessful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Check the status code 400\", function (){\r",
+							"    pm.response.to.have.status (400)\r",
+							"    pm.response.to.be.badRequest\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"sydney@fife\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/register",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login - Successful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Check the status code 200\", function (){\r",
+							"    pm.response.to.have.status (200)\r",
+							"    pm.response.to.be.ok\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"pm.test (\"Verify the token\", function(){\r",
+							"    pm.expect (jsonData.token).to.eql(\"QpwL5tke4Pnpja7X4\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"cityslicka\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/login",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login - Unsuccessful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Check the status code 400\", function (){\r",
+							"    pm.response.to.have.status (400)\r",
+							"    pm.response.to.be.badRequest\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"peter@klaven\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/login",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delayed Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"Verify the status code\",function (){\r",
+							"       pm.response.to.have.status(200)\r",
+							"       pm.response.to.be.ok\r",
+							"   });\r",
+							"\r",
+							"   //1st variable\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"\r",
+							"pm.test (\"Verify the page\", function(){\r",
+							"    pm.expect (jsonData.page).to.eqls(1)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the per_page\", function(){\r",
+							"    pm.expect (jsonData.per_page).to.eqls(6)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the total\", function(){\r",
+							"    pm.expect (jsonData.total).to.eqls(12)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the total_pages\", function(){\r",
+							"    pm.expect (jsonData.total_pages).to.eqls(2)\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//2nd variable\r",
+							"\r",
+							"let data1 = jsonData.data[0];\r",
+							"//let data1 = jsonData.data1;\r",
+							"console.log(data1);\r",
+							"\r",
+							"\r",
+							"pm.test (\"Verify the id\", function(){\r",
+							"    pm.expect (data1.id).to.eqls(1)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the email\", function(){\r",
+							"    pm.expect (data1.email).to.eql(\"george.bluth@reqres.in\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the first name\", function(){\r",
+							"    pm.expect (data1.first_name).to.eql(\"George\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the last name\", function(){\r",
+							"    pm.expect (data1.last_name).to.eql(\"Bluth\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the avatar\", function(){\r",
+							"    pm.expect (data1.avatar).to.eql(\"https://reqres.in/img/faces/1-image.jpg\")\r",
+							"});\r",
+							"\r",
+							"let data3 = jsonData.data[2];\r",
+							"//let data1 = jsonData.data1;\r",
+							"console.log(data3);\r",
+							"\r",
+							"\r",
+							"pm.test (\"Verify the id\", function(){\r",
+							"    pm.expect (data3.id).to.eqls(3)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the email\", function(){\r",
+							"    pm.expect (data3.email).to.eql(\"emma.wong@reqres.in\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the first name\", function(){\r",
+							"    pm.expect (data3.first_name).to.eql(\"Emma\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the last name\", function(){\r",
+							"    pm.expect (data3.last_name).to.eql(\"Wong\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the avatar\", function(){\r",
+							"    pm.expect (data3.avatar).to.eql(\"https://reqres.in/img/faces/3-image.jpg\")\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"//3rd variable цикъл \r",
+							"let data6 = jsonData.data[5];\r",
+							"console.log(data6);\r",
+							"\r",
+							"pm.test (\"Verify the id\", function(){\r",
+							"    pm.expect (data6.id).to.eqls(6)\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the email\", function(){\r",
+							"    pm.expect (data6.email).to.eqls('tracey.ramos@reqres.in')\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the first name\", function(){\r",
+							"    pm.expect (data6.first_name).to.eqls(\"Tracey\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the last name\", function(){\r",
+							"    pm.expect (data6.last_name).to.eqls(\"Ramos\")\r",
+							"});\r",
+							"\r",
+							"pm.test (\"Verify the avatar\", function(){\r",
+							"    pm.expect (data6.avatar).to.eqls(\"https://reqres.in/img/faces/6-image.jpg\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?delay=3",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "delay",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": ""
+		}
+	]
+}
