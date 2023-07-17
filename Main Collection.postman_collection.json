@@ -305,7 +305,7 @@
 							"    pm.expect(jsonData.accessToken).to.be.string\r",
 							"});\r",
 							"\r",
-							"pm.globals.set(\"AccessToken\", jsonData.accessToken);"
+							"pm.environment.set(\"AccessToken\", jsonData.accessToken);"
 						],
 						"type": "text/javascript"
 					}
@@ -353,7 +353,7 @@
 							"    pm.expect(jsonData.created).to.be.true\r",
 							"});\r",
 							"\r",
-							"pm.globals.set(\"orderId\", jsonData.orderId)\r",
+							"pm.environment.set(\"orderId\", jsonData.orderId)\r",
 							"\r",
 							""
 						],
@@ -926,6 +926,12 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "AccessToken",
+			"value": ""
 		}
 	]
 }
